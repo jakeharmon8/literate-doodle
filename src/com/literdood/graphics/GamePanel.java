@@ -1,19 +1,28 @@
 package com.literdood.graphics;
 
 import javax.swing.*;
+
+import com.literdood.Nut;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
-public class GamePanel extends JPanel implements KeyListener, ActionListener {
+public class GamePanel extends JPanel implements KeyListener, ActionListener, MouseListener {
 
     private int S_WIDTH = 512;
     private int S_HEIGHT = 512;
+    
+    ArrayList<Nut> nutList = new ArrayList<Nut>();
 
     public GamePanel() {
         addKeyListener(this);
+        addMouseListener(this);
         setPreferredSize(new Dimension(S_WIDTH, S_HEIGHT));
 
         setFocusable(true);
@@ -27,6 +36,10 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
         // clear screen
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, S_WIDTH, S_HEIGHT);
+        
+        for (int i = 0; i < nutList.size(); i++) {
+        	nutList.get(i).draw(g);
+        }
     }
 
     @Override
@@ -57,4 +70,38 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent arg0) {
         repaint();
     }
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		Nut nut1 = new Nut();
+		nut1.c = Color.red;
+		nut1.x = e.getX();
+		nut1.y = e.getY();
+		nutList.add(nut1);
+		repaint();
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 }

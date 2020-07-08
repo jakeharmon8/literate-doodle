@@ -1,5 +1,6 @@
 package com.literdood.game;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
@@ -7,10 +8,22 @@ public class Path {
     ArrayList<Point2D.Float> points = new ArrayList<>();
 
     public Path() {
-        points.add(new Point2D.Float(0f, 0f));
-        points.add(new Point2D.Float(50f, 50f));
-        points.add(new Point2D.Float(100f, 50f));
-        points.add(new Point2D.Float(512f, 512f));
+        points.add(new Point2D.Float(0, 0));
+        points.add(new Point2D.Float(100, 100));
+        points.add(new Point2D.Float(200, 100));
+        points.add(new Point2D.Float(250, 150));
+        points.add(new Point2D.Float(250, 200));
+        points.add(new Point2D.Float(250, 250));
+        points.add(new Point2D.Float(200, 300));
+        points.add(new Point2D.Float(100, 300));
+        points.add(new Point2D.Float(50, 250));
+        points.add(new Point2D.Float(150, 225));
+        points.add(new Point2D.Float(250, 225));
+        points.add(new Point2D.Float(350, 250));
+        points.add(new Point2D.Float(400, 300));
+        points.add(new Point2D.Float(400, 350));
+        points.add(new Point2D.Float(350, 400));
+        points.add(new Point2D.Float(512, 512));
     }
 
     public Point2D.Float getStart() {
@@ -22,7 +35,7 @@ public class Path {
     }
 
     public PathInfo getNextPosition(float progress, float speed) {
-        while(speed > 0) {
+         while(speed > 0) {
             if((int) progress >= points.size() - 1) {
                 return new PathInfo(progress, getEnd(), true);
             }
@@ -36,7 +49,8 @@ public class Path {
 
             if(nextProgressScaled > dist) {
                 progress = (int) progress + 1;
-                speed -= nextProgressScaled - dist;
+                speed = (float) (nextProgressScaled - dist);
+                continue;
             }
 
             float nextProgress = (float)((int) progress + nextProgressScaled / dist);
@@ -46,6 +60,21 @@ public class Path {
         }
 
         return null;
+    }
+
+    public void draw(Graphics g) {
+        g.setColor(Color.black);
+        for(int i = 0; i < points.size()-1; i++) {
+            Point2D.Float p1 = points.get(i);
+            Point2D.Float p2 = points.get(i + 1);
+            g.drawLine((int) p1.x, (int) p1.y, (int) p2.x, (int) p2.y);
+        }
+
+        g.setColor(Color.green);
+        int size = 16;
+        for(Point2D.Float p : points) {
+            g.drawOval((int) (p.x - size/2), (int) (p.y - size/2), size, size);
+        }
     }
 
     public class PathInfo {

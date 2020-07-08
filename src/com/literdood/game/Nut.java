@@ -5,20 +5,37 @@ import java.awt.Graphics;
 
 public class Nut {
 	
-	public Color c;
+	public Color c = Color.red;
 	// center point
-	public int x;
-	public int y;
-	public int size = 20;
+	public float x;
+	public float y;
+	public float size = 20;
+	public float speed = 10;
+	public Path path;
 
-	public Nut() {
-		// TODO Auto-generated constructor stub
+	private float pathProgress = 0;
+
+	public Nut(Path path) {
+		this.path = path;
 	}
-	
+
+	// if this returns true, delete the nut
+	public boolean update() {
+		Path.PathInfo pi = path.getNextPosition(pathProgress, speed);
+
+		if(pi.finished) {
+			return true;
+		} else {
+			pathProgress = pi.nextProgress;
+			x = pi.nextPosition.x;
+			y = pi.nextPosition.y;
+			return false;
+		}
+	}
 	
 	public void draw(Graphics g) {
 		g.setColor(c);
-		g.fillOval(x - size/2, y - size/2, size, size);
+		g.fillOval((int)(x - size/2), (int)(y - size/2), (int)size, (int)size);
 	}
 
 }

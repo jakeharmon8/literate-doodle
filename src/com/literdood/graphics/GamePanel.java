@@ -3,6 +3,7 @@ package com.literdood.graphics;
 import javax.swing.*;
 
 import com.literdood.game.Nut;
+import com.literdood.game.Path;
 import com.literdood.game.Projectile;
 import com.literdood.game.Tower;
 
@@ -25,10 +26,14 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener, Mo
     LinkedList<Tower> towers = new LinkedList<Tower>();
     LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
 
+    Path path = new Path();
+
     public GamePanel() {
         addKeyListener(this);
         addMouseListener(this);
         setPreferredSize(new Dimension(S_WIDTH, S_HEIGHT));
+
+        nutList.add(new Nut(path));
 
         setFocusable(true);
         requestFocus();
@@ -41,6 +46,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener, Mo
         // clear screen
         g.setColor(Color.WHITE);
         g.fillRect(0, 0, S_WIDTH, S_HEIGHT);
+
+        path.draw(g);
         
         for (int i = 0; i < nutList.size(); i++) {
         	nutList.get(i).draw(g);
@@ -59,10 +66,11 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener, Mo
             case KeyEvent.VK_D:
                 break;
             case KeyEvent.VK_SPACE:
+                this.actionPerformed(null);
                 break;
         }
 
-        repaint();
+//        repaint();
     }
 
     @Override
@@ -73,16 +81,15 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener, Mo
 
     @Override
     public void actionPerformed(ActionEvent arg0) {
+        for(Nut n : nutList) {
+            n.update();
+        }
+
         repaint();
     }
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		Nut nut1 = new Nut();
-		nut1.c = Color.red;
-		nut1.x = e.getX();
-		nut1.y = e.getY();
-		nutList.add(nut1);
 		repaint();
 	}
 

@@ -1,4 +1,4 @@
-package com.literdood;
+package com.literdood.game;
 
 import java.awt.Color;
 import java.awt.Graphics;

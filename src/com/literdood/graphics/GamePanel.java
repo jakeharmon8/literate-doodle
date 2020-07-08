@@ -2,7 +2,9 @@ package com.literdood.graphics;
 
 import javax.swing.*;
 
-import com.literdood.Nut;
+import com.literdood.game.Nut;
+import com.literdood.game.Projectile;
+import com.literdood.game.Tower;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +14,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class GamePanel extends JPanel implements KeyListener, ActionListener, MouseListener {
 
@@ -19,6 +22,8 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener, Mo
     private int S_HEIGHT = 512;
     
     ArrayList<Nut> nutList = new ArrayList<Nut>();
+    LinkedList<Tower> towers = new LinkedList<Tower>();
+    LinkedList<Projectile> projectiles = new LinkedList<Projectile>();
 
     public GamePanel() {
         addKeyListener(this);
@@ -82,26 +87,14 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener, Mo
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mousePressed(MouseEvent e) {}
 
 	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseReleased(MouseEvent e) {}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
 
 	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseExited(MouseEvent e) {}
 }

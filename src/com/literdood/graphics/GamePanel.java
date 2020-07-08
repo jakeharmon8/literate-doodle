@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener, Mo
     private int S_WIDTH = 512;
     private int S_HEIGHT = 512;
     
-    ArrayList<Nut> nutList = new ArrayList<Nut>();
+    public static ArrayList<Nut> nutList = new ArrayList<Nut>();
     LinkedList<BasicTower> towers = new LinkedList<BasicTower>();
     public static LinkedList<BasicProjectile> projectiles = new LinkedList<BasicProjectile>();
 
@@ -101,17 +101,21 @@ public class GamePanel extends JPanel implements KeyListener, ActionListener, Mo
         	p.update();
         }
 
+        for(BasicTower t : towers) {
+            t.update();
+        }
+
         repaint();
     }
 
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		towers.add(new BasicTower(e.getX(), e.getY()));
-		repaint();
-	}
+	public void mouseClicked(MouseEvent e) {}
 
 	@Override
-	public void mousePressed(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {
+        towers.add(new BasicTower(e.getX(), e.getY()));
+        repaint();
+    }
 
 	@Override
 	public void mouseReleased(MouseEvent e) {}

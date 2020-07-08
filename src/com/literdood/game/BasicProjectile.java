@@ -5,17 +5,15 @@ import java.awt.Graphics;
 
 public class BasicProjectile {
 	
-	public int speed;
 	int size = 6;
-	double vx = 0;
-	double vy = -1;
 	Color c = Color.black;
-	public double x, y;
+	public double x, y, vx, vy;
 	
-	public BasicProjectile(int x, int y, int speed) {
+	public BasicProjectile(float x, float y, float vx, float vy) {
 		this.x = x;
 		this.y = y;
-		this.speed = speed;
+		this.vx = vx;
+		this.vy = vy;
 	}
 	
 	public void draw(Graphics g) {
@@ -24,7 +22,7 @@ public class BasicProjectile {
 	}
 	
 	public void update() {
-		x = x + vx * speed; 
-		y = y + vy * speed;
+		x = x + vx;
+		y = y + vy;
 	}
 }
